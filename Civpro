@@ -1,0 +1,60 @@
+import time
+import random
+
+# Dictionary of rules (You can add more!)
+rules = {
+    "Subject-Matter Jurisdiction": "Subject-matter jurisdiction is a court’s power to hear a type of case.",
+    "Federal-Question Jurisdiction": "Federal courts have federal-question jurisdiction over cases that arise under federal law.",
+    "Diversity Jurisdiction": "Federal courts have diversity jurisdiction if (1) there is complete diversity of citizenship and (2) the amount in controversy is greater than $75,000.",
+    "Complete Diversity of Citizenship": "Complete diversity of citizenship exists if no plaintiff is a citizen of the same state as any defendant.",
+    "Supplemental Jurisdiction": "Supplemental jurisdiction allows a federal court to hear claims that would otherwise fall outside the court’s jurisdiction if those claims form part of the same case or controversy.",
+    "Removal": "Removal allows a defendant to move a case from state court to federal court if the case falls within federal subject-matter jurisdiction."
+}
+
+# Tracking progress
+mastered_rules = []
+needs_review = []
+
+def run_practice():
+    print("\n🚀 Bar Exam Rule Memorization - Typing Recall Practice 🚀")
+    while True:
+        rule_name, correct_rule = random.choice(list(rules.items()))
+        
+        print(f"\n📌 Rule: {rule_name}")
+        input("Press Enter to start typing...")
+
+        start_time = time.time()
+        user_input = input("\nType the rule from memory: ")
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
+        words_per_minute = round(len(user_input.split()) / (elapsed_time / 60), 2) if elapsed_time > 0 else 0
+
+        print("\n✅ Correct Rule:")
+        print(correct_rule)
+
+        print("\n⏱️ Your Speed:", words_per_minute, "WPM")
+        print("📊 Accuracy: ", "✅ Correct" if user_input.strip() == correct_rule.strip() else "❌ Needs Work")
+
+        # Mark as mastered or needs review
+        if user_input.strip() == correct_rule.strip():
+            mastered_rules.append(rule_name)
+        else:
+            needs_review.append(rule_name)
+
+        # Ask user what to do next
+        next_step = input("\nMark this rule as (M)astered, (R)eview, or (Q)uit: ").strip().lower()
+        if next_step == "q":
+            break
+        elif next_step == "m":
+            mastered_rules.append(rule_name)
+        elif next_step == "r":
+            needs_review.append(rule_name)
+
+    print("\n🎯 Practice Summary 🎯")
+    print(f"✅ Mastered Rules: {len(set(mastered_rules))}")
+    print(f"⚠️ Needs Review: {len(set(needs_review))}")
+    print("\nKeep practicing and good luck on the Bar Exam! 🚀🔥")
+
+# Run the program
+run_practice()
